@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Diseño y nuevos medios" />
+        <link href="style.css" rel="stylesheet" />
+        <title>DNO037 | Evaluación Nº1</title>
+    </head>
+    <body>
+        <header></header>
+        <footer>
+            <div><a href="index.html">👈 Volver atrás</a></div>
+            <div id="controles"></div>
+            <div><a href="#" id="descargar">📥 Descargar</a></div>
+            <div><a href="#" id="borrar">❌ Borrar todo</a></div>
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js" integrity="sha512-3RlxD1bW34eFKPwj9gUXEWtdSMC59QqIqHnD8O/NoTwSJhgxRizdcFVQhUMFyTp5RwLTDL0Lbcqtl8b7bFAzog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            var palabra_pasada = "Devimon";
+            var elColor;
+            var elSlider;
+
+            function setup() {
+                var title = select("header");
+                createElement("h1", "Aceptaste dibujar a " + palabra_pasada).parent(title);
+                var descarga = select("#descargar");
+                descarga.mousePressed("#descarga");
+                var borra = select("#borrar");
+                borra.mousePressed("#borrar");
+                elColor = createColorPicker("#222").parent("controles");
+                elSlider = createSlider(1, 5, 3).parent("controles");
+                createCanvas(windowWidth, windowHeight).position(0, 0).style("z-index", -1);
+                background("#fff");
+            }
+
+            function draw() {
+                stroke(elColor.color());
+                strokeWeight(elSlider.value());
+                if (mouseIsPressed) {line(pmouseX, pmouseY, mouseX, mouseY);
+                }
+            }
+
+            function descargador() {
+                saveCanvas(palabra_pasada, "jpg");
+            }
+
+            function borrador() {
+               background("#eceff1");
+            }
+
+            function EstaNoEs(){
+                select("h1").html("Esta no es la función para tal mousePressed");
+                background(random(0,255),random(0,255),random(0,255));
+            }
+        </script>
+    </body>
+</html>
